@@ -1,0 +1,21 @@
+export const CreateUserResponseBody = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title" : "CreateUserResponseBody",
+    "type" : "object",
+    "properties": {
+        "id" : {
+            "type": "string"
+        },
+        "email" : {
+            "type" : "string"
+        },
+        "firstName" : {
+            "type" : "string"
+        },
+        "lastName" : {
+            "type" : "string"
+        }
+    },
+    "required": ["id", "email", "firstName", "lastName"]
+}
+

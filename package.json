@@ -1,0 +1,38 @@
+{
+  "name": "node-ts-template",
+  "version": "1.0.0",
+  "description": "Basic template of a node + typescript project",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rmdir /s /q dist && tsc",
+    "lint": "eslint --fix src",
+    "start": "node dist/index.js",
+    "test": "SET NODE_ENV=test&&mocha --recursive dist/specs/routes --exit --async-stack-traces",
+    "compile-schemas": "json2ts -i schemas -o types"
+  },
+  "author": "Thomas VEILLARD",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^15.12.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^8.2.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "class-validator": "^0.14.0",
+    "dotenv": "^16.0.3",
+    "fast-json-stringify": "^5.5.0",
+    "fastify": "^4.11.0",
+    "json-schema-to-ts": "^2.6.2",
+    "pg": "^8.8.0",
+    "typeorm": "^0.3.11"
+  }
+}

@@ -1,0 +1,6 @@
+dist
+node_modules
+docker
+
+.env
+environment.d.ts

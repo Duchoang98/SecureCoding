@@ -8,7 +8,7 @@
     "lint": "eslint --fix src",
     "start": "node dist/index.js",
     "test": "SET NODE_ENV=test&&mocha --recursive dist/specs/routes --exit --async-stack-traces",
-    "compile-schemas": "json2ts -i schemas -o types"
+    "compile-schemas": "json2ts -i src/schemas -o src/types"
   },
   "author": "Thomas VEILLARD",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "eslint": "^8.2.0",
+    "json-schema-to-typescript": "^11.0.3",
     "mocha": "^10.2.0",
     "typescript": "^4.9.4"
   },

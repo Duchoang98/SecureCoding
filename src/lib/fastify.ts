@@ -1,30 +1,39 @@
+// import fastify
 import fastify, { FastifyReply, FastifyRequest, RouteOptions } from "fastify";
 
-import { CreateUserResponseBody } from "../schemas/createUserResponseBody";
-import { CreateUserRequestBody } from "../schemas/createUserRequestBody";
+// import AppDataSource
 import { AppDataSource } from "./typeorm";
+
+// import User
 import { User } from "../entities/User";
 
+//import the generated interfaces
+import { CreateUserRequestBody as CreateUserRequestBodyInterFace} from "../types/createUserRequestBody";
+import { CreateUserResponseBody as CreateUserResponseBodyInterFace} from "../types/createUserResponseBody";
+
+// import json files
+import createUserRequestBody  from "../schemas/createUserRequestBody.json";
+import createUserResponseBody  from "../schemas/createUserResponseBody.json";
+
+
 import { webApiRoutes } from "../routes/web-api/web-api-routes";
+
 import * as dotenv from "dotenv";
 dotenv.config({ path: "../../.env" });
 
 const logger = process.env.FASTIFY_LOGGER;
 const booleanLogger = logger === "true";
 
-export const server = fastify()
 
-server.get("/ping", async (request, reply) => {
-  return "pong\n";
-});
+export const server = fastify()
 
 server.post(
   "/web-api/users",
   {
     schema: {
-      body: CreateUserRequestBody,
+      body: createUserRequestBody,
       response: {
-        201: CreateUserResponseBody,
+        201: createUserResponseBody,
       },
     },
   },
@@ -52,18 +61,19 @@ server.post(
   }
 );
 
-// export function assertsResponseSchemaPresenceHook(routeOptions: RouteOptions) {
-//   // do it yourself
+export function assertsResponseSchemaPresenceHook(routeOptions: RouteOptions) {
+  // do it yourself
 
-//   console.log("routeOptions avant le if", routeOptions?.schema);
-//   // console.log('typeof routeOptions schema', typeof routeOptions.schema?)
-//   // console.log('typeof routeOptions schema response', typeof routeOptions.schema?.response)
+  console.log("routeOptions avant le if", routeOptions?.schema);
+  
+  // console.log('typeof routeOptions schema', typeof routeOptions.schema?)
+  // console.log('typeof routeOptions schema response', typeof routeOptions.schema?.response)
 
-//   if (!routeOptions.schema) {
-//     console.log("routeOptions apres le if", routeOptions?.schema);
-//     throw new Error("Response schema is not defined");
-//   }
-// }
+  if (!routeOptions.schema) {
+    console.log("routeOptions apres le if", routeOptions?.schema);
+    throw new Error("Response schema is not defined");
+  }
+}
 
 // const Ajv = require('ajv')
 // const ajv = new Ajv({

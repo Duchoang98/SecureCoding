@@ -1,9 +1,8 @@
-import { FastifyInstance, RouteOptions } from "fastify";
-import { resolve } from "path";
+import { FastifyInstance } from "fastify";
+
 import { User } from "../../entities/User";
 import { AppDataSource } from "../../lib/typeorm";
 
-import createUserRequestBody from "../../schemas/createUserRequestBody.json";
 import createUserResponseBody from "../../schemas/createUserResponseBody.json";
 
 export async function webApiRoutes (fastify: FastifyInstance) {

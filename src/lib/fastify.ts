@@ -25,7 +25,9 @@ const logger = process.env.FASTIFY_LOGGER;
 const booleanLogger = logger === "true";
 
 
-export const server = fastify()
+export const server = fastify({ logger: booleanLogger })
+  .addHook('onRoute', assertsResponseSchemaPresenceHook)
+  .register(webApiRoutes, { prefix: '/web-api' })
 
 server.post(
   "/web-api/users",
@@ -62,20 +64,7 @@ server.post(
 );
 
 export function assertsResponseSchemaPresenceHook(routeOptions: RouteOptions) {
-  // do it yourself
-
-  console.log("routeOptions avant le if", routeOptions?.schema);
-  
-  // console.log('typeof routeOptions schema', typeof routeOptions.schema?)
-  // console.log('typeof routeOptions schema response', typeof routeOptions.schema?.response)
-
   if (!routeOptions.schema) {
-    console.log("routeOptions apres le if", routeOptions?.schema);
     throw new Error("Response schema is not defined");
   }
 }
-
-// const Ajv = require('ajv')
-// const ajv = new Ajv({
-//   removeAdditional: 'all',
-// })

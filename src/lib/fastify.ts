@@ -15,19 +15,31 @@ import { CreateUserResponseBody as CreateUserResponseBodyInterFace} from "../typ
 import createUserRequestBody  from "../schemas/createUserRequestBody.json";
 import createUserResponseBody  from "../schemas/createUserResponseBody.json";
 
-
+// import webApiRoutes
 import { webApiRoutes } from "../routes/web-api/web-api-routes";
 
+// import ajv
+import Ajv from "ajv";
+import fastifyAjv from "fastify";
+
+// import variable environment 
 import * as dotenv from "dotenv";
+
+
 dotenv.config({ path: "../../.env" });
 
 const logger = process.env.FASTIFY_LOGGER;
 const booleanLogger = logger === "true";
 
 
-export const server = fastify({ logger: booleanLogger })
+
+export const server = fastify({ logger: booleanLogger, ajv : {customOptions : {
+  removeAdditional: false
+},}})
   .addHook('onRoute', assertsResponseSchemaPresenceHook)
   .register(webApiRoutes, { prefix: '/web-api' })
+
+
 
 server.post(
   "/web-api/users",
@@ -68,3 +80,4 @@ export function assertsResponseSchemaPresenceHook(routeOptions: RouteOptions) {
     throw new Error("Response schema is not defined");
   }
 }
+

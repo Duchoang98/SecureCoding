@@ -18,10 +18,6 @@ import createUserResponseBody  from "../schemas/createUserResponseBody.json";
 // import webApiRoutes
 import { webApiRoutes } from "../routes/web-api/web-api-routes";
 
-// import ajv
-import Ajv from "ajv";
-import fastifyAjv from "fastify";
-
 // import variable environment 
 import * as dotenv from "dotenv";
 
@@ -76,8 +72,16 @@ server.post(
 );
 
 export function assertsResponseSchemaPresenceHook(routeOptions: RouteOptions) {
-  if (!routeOptions.schema) {
+  if (!routeOptions.schema?.response) {
     throw new Error("Response schema is not defined");
   }
 }
+
+export function assertsValidationSchemaPresenceHook (routeOptions: RouteOptions) {
+  if (!routeOptions.schema?.body || routeOptions.schema.querystring || routeOptions.schema.params) {
+    throw new Error("Validation schema not found")
+  }
+}
+
+
 

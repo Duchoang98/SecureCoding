@@ -1,10 +1,16 @@
-import fastify, { FastifyInstance } from "fastify";
+import fastify, { FastifyInstance, RouteOptions } from "fastify";
 import { expect } from "chai";
 
+import * as chai from "chai";
+
+import chaiAsPromised from 'chai-as-promised';
 import { AppDataSource } from "../../../lib/typeorm";
 import { server } from '../../../lib/fastify'
 
 import { assertsResponseSchemaPresenceHook } from "../../../lib/fastify";
+import { assertsValidationSchemaPresenceHook } from "../../../lib/fastify";
+
+chai.use(chaiAsPromised);
 
 // describe('/web-api/users', function () {
 //   before(async function () {
@@ -32,11 +38,57 @@ import { assertsResponseSchemaPresenceHook } from "../../../lib/fastify";
 describe('assertResponseSchemaPresenceHook',function () {
   it("throw an error if an unsafe route is registered", async function() {
     
-    const server = fastify({ logger: true })
-    .addHook('onRoute', assertsResponseSchemaPresenceHook)
+    const route = async function (fastify: FastifyInstance) {
+      fastify.post("/users/", {
+        schema: {
+          body: {
+            properties: {
+              hello: 'world',
+            },
+          },
+        },
+        handler: async (request, reply): Promise<void> => {
+          return
+        },
+      });
+    };
 
-    server.get('/web-api/test', {schema: {response : "ok"}}, () => {})
+
+    const server = fastify()
+    .addHook('onRoute', assertsResponseSchemaPresenceHook)
+    .register(route)
+
+    await chai.expect(server).to.eventually.be.rejected.and.deep.include({
+      message: 'Response schema is not defined'
+    });
+  })
+})
+
+describe('assertsValidationSchemaPresenceHook',function () {
+  it("should enforce the presence of a validation schema for request body, query, or params", async function() {
     
-    // The test will fail if we don't have the property schema 
+    const route = async function (fastify: FastifyInstance) {
+      fastify.post("/users/", {
+        schema: {
+          response: {
+            properties: {
+              hello: 'world',
+            },
+          },
+        },
+        handler: async (request, reply): Promise<void> => {
+          return
+        },
+      });
+    };
+
+
+    const server = fastify()
+    .addHook('onRoute', assertsValidationSchemaPresenceHook)
+    .register(route)
+
+    await chai.expect(server).to.eventually.be.rejected.and.deep.include({
+      message: 'Validation schema not found'
+    });
   })
 })

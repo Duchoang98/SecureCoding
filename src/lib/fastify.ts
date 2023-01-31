@@ -21,19 +21,31 @@ import { webApiRoutes } from "../routes/web-api/web-api-routes";
 // import variable environment 
 import * as dotenv from "dotenv";
 
+// import ValidationError and EntityNotFoundError
+import { ValidationError } from "class-validator";
+import { EntityNotFoundError } from "typeorm";
+
 
 dotenv.config({ path: "../../.env" });
 
 const logger = process.env.FASTIFY_LOGGER;
 const booleanLogger = logger === "true";
 
-
-
 export const server = fastify({ logger: booleanLogger, ajv : {customOptions : {
   removeAdditional: false
 },}})
   .addHook('onRoute', assertsResponseSchemaPresenceHook)
   .register(webApiRoutes, { prefix: '/web-api' })
+
+server.setErrorHandler((error, request, reply) => {
+  if (error instanceof ValidationError) {
+    reply.status(400).send({ error: error.message });
+  } else if (error instanceof EntityNotFoundError) {
+    reply.status(404).send({ error: 'Entity not found' });
+  } else {
+    reply.status(500).send({ error: 'Internal Server Error' });
+  }
+});
 
 
 

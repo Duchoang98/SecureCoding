@@ -68,16 +68,14 @@ server.post(
     user.email = (request.body as any).email;
     user.passwordHash = (request.body as any).password;
 
-    console.log("before save", user);
     await repositoryUser.save(user);
-    console.log("after save", user);
-
+  
     const responseUser = new User();
     responseUser.id = user.id;
     responseUser.firstName = user.firstName;
     responseUser.lastName = user.lastName;
     responseUser.email = user.email;
-    console.log("response user", responseUser);
+    
     await reply.status(201).send(responseUser);
     await reply.status(201).send({ message: "User created successfully" });
   }

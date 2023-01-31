@@ -6,8 +6,10 @@ import {
   PrimaryGeneratedColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from "typeorm";
 import {ValidationError} from '../specs/entities/ValidationError'
+import { Session } from "./Session";
 
 @Entity()
 export class User {
@@ -40,6 +42,10 @@ export class User {
   @IsNotEmpty()
   passwordHash!: String;
 
+  @OneToMany(() => Session, session => session.user)
+  sessions!: Promise<Session[]>
+
+
   @BeforeInsert()
   @BeforeUpdate()
   validate() {
@@ -60,7 +66,4 @@ export class User {
       );
     }
   }
-  
-
-  
 }

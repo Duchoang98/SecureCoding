@@ -1,5 +1,5 @@
-import { EventSubscriber, EntitySubscriberInterface, BeforeInsert, BeforeUpdate, InsertEvent } from 'typeorm';
-import { ValidationError, validate } from 'class-validator';
+import { EventSubscriber, EntitySubscriberInterface, InsertEvent } from 'typeorm';
+import { validate } from 'class-validator';
 import { User } from './User';
 
 @EventSubscriber()

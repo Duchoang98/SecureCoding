@@ -32,7 +32,9 @@ jobs:
       
     - name: Build
       run: |
-        npm run build
+        mkdir dist
+        cd dist
+        tsc
         
       
     - name: Test

@@ -25,8 +25,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install
-    - run: npm ci
+      run: npm ci
     - name: Build
-    - run: rmdir /s /q dist && tsc
+      run: rmdir /s /q dist && tsc
     - name: Test
-    - run: npm run test
+      run: npm run test

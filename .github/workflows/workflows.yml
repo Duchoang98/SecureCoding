@@ -29,6 +29,7 @@ jobs:
       run: |
         echo "Installing ..."
         npm ci
+        npm i mocha
       
     - name: Build
       run: |
@@ -39,5 +40,4 @@ jobs:
     - name: Test
       run: |
         echo "Testing ..."
-        npm install mocha
         mocha --recursive dist/specs/routes --exit --async-stack-traces

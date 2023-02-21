@@ -18,11 +18,11 @@ export class User {
   
   @Column()
   @IsNotEmpty()
-  firstName!: String;
+  firstName!: string;
   
   @Column()
   @IsNotEmpty()
-  lastName!: String;
+  lastName!: string;
 
   
   @IsEmail()
@@ -40,7 +40,7 @@ export class User {
 
   @Column()
   @IsNotEmpty()
-  passwordHash!: String;
+  passwordHash!: string;
 
   @OneToMany(() => Session, session => session.user)
   sessions!: Promise<Session[]>

@@ -33,7 +33,9 @@ jobs:
     - name: Build
       run: |
         echo "Building ..."
-        mkdir dist && cd dist && tsc
+        mkdir dist && cd dist 
+        ls
+        
       
     - name: Test
       run: |

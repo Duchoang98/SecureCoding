@@ -32,7 +32,8 @@ jobs:
       
     - name: Build
       run: |
-        rmdir /s /q dist && tsc
+        cd dist
+        ls -R
       
 #     - name: Test
 #       run: |

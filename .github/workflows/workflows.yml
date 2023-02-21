@@ -32,6 +32,7 @@ jobs:
       
     - name: Build
       run: |
+        mkdir dist
         cd dist
         tsc
       
@@ -39,5 +40,4 @@ jobs:
       run: |
         echo "Testing ..."
         npm install mocha
-        EXPORT NODE_ENV=test
         mocha --recursive dist/specs/routes --exit --async-stack-traces

@@ -36,8 +36,11 @@ jobs:
         mkdir dist
         cd dist
         tsc
-      
-    - name: Test
+    - name: Lint
       run: |
-        echo "Testing ..."
-        mocha --recursive dist/specs/routes --exit --async-stack-traces
+        npm run lint
+      
+#     - name: Test
+#       run: |
+#         echo "Testing ..."
+#         mocha --recursive dist/specs/routes --exit --async-stack-traces

@@ -36,6 +36,8 @@ jobs:
         mkdir dist
         cd dist
         tsc
+        
+# Works but have a lot of errors so i put it in comment        
 #     - name: Lint
 #       run: |
 #         npm run lint

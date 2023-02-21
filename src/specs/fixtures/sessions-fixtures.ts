@@ -1,7 +1,7 @@
-import { Session } from '../../entities/session.js'
-import { buildUserFixture } from './users-fixtures.js'
-import { User } from '../../entities/user.js'
-import { AppDataSource } from '../../lib/typeorm.js'
+import { Session } from '../../entities/session'
+import { buildUserFixture } from './users-fixtures'
+import { User } from '../../entities/user'
+import { AppDataSource } from '../../lib/typeorm'
 
 type SessionFixtureOptions = { user?: User }
 

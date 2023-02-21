@@ -1,6 +1,6 @@
-import { User } from '../../entities/user.js'
+import { User } from '../../entities/user'
 import { faker } from '@faker-js/faker'
-import { AppDataSource } from '../../lib/typeorm.js'
+import { AppDataSource } from '../../lib/typeorm'
 
 type UserFixtureOptions = Partial<Pick<User, 'firstName' | 'lastName' | 'email'>>
 

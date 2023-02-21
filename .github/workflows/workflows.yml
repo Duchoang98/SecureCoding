@@ -32,9 +32,7 @@ jobs:
       
     - name: Build
       run: |
-        echo "Building ..."
-        mkdir dist && cd dist 
-        ls
+        npm run build
         
       
     - name: Test

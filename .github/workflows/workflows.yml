@@ -34,6 +34,7 @@ jobs:
       run: |
         cd dist
         ls -R
+        tsc
       
 #     - name: Test
 #       run: |

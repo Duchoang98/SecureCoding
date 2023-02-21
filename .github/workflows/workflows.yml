@@ -40,4 +40,4 @@ jobs:
     - name: Test
       run: |
         echo "Testing ..."
-        mocha --recursive dist/specs/routes --exit --async-stack-traces"
+        mocha --recursive dist/specs/routes --exit --async-stack-traces

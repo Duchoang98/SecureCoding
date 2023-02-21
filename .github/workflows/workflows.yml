@@ -38,9 +38,9 @@ jobs:
         tsc
         
 # Works but have a lot of errors so i put it in comment        
-#     - name: Lint
-#       run: |
-#         npm run lint
+    - name: Lint
+      run: |
+        npm run lint
       
     - name: Test
       run: |

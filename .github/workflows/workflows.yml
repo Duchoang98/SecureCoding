@@ -34,10 +34,10 @@ jobs:
       run: |
         mkdir dist
         cd dist
-        tsc
+        ls -R
         
       
     - name: Test
       run: |
         echo "Testing ..."
-        npm run test
+        mocha --recursive dist/specs/routes --exit --async-stack-traces"

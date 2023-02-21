@@ -1,21 +1,21 @@
-import { User } from '../../entities/user'
-import { faker } from '@faker-js/faker'
-import { AppDataSource } from '../../lib/typeorm'
+// import { User } from '../../entities/user'
+// import { faker } from '@faker-js/faker'
+// import { AppDataSource } from '../../lib/typeorm'
 
-type UserFixtureOptions = Partial<Pick<User, 'firstName' | 'lastName' | 'email'>>
+// type UserFixtureOptions = Partial<Pick<User, 'firstName' | 'lastName' | 'email'>>
 
-export function buildUserFixture(opts: UserFixtureOptions = {}) {
-  const user = new User()
-  user.firstName = opts.firstName ?? faker.name.firstName()
-  user.lastName = opts.lastName ?? faker.name.lastName()
-  user.email = opts.email ?? faker.internet.email()
+// export function buildUserFixture(opts: UserFixtureOptions = {}) {
+//   const user = new User()
+//   user.firstName = opts.firstName ?? faker.name.firstName()
+//   user.lastName = opts.lastName ?? faker.name.lastName()
+//   user.email = opts.email ?? faker.internet.email()
 
-  // that hash matches password 'changethat', hardcoded so we save CPU hasing time
-  user.passwordHash = '$2a$12$dm2t30Y07Mt9TklkLOuy.efFIJ69WTW3f7NmwH8uioX9R6NHMQSXO'
+//   // that hash matches password 'changethat', hardcoded so we save CPU hasing time
+//   user.passwordHash = '$2a$12$dm2t30Y07Mt9TklkLOuy.efFIJ69WTW3f7NmwH8uioX9R6NHMQSXO'
 
-  return user
-}
+//   return user
+// }
 
-export function createUserFixture(opts: UserFixtureOptions = {}) {
-  return AppDataSource.getRepository(User).save(buildUserFixture(opts))
-}
+// export function createUserFixture(opts: UserFixtureOptions = {}) {
+//   return AppDataSource.getRepository(User).save(buildUserFixture(opts))
+// }

@@ -29,7 +29,7 @@ jobs:
       run: |
         echo "Installing ..."
         npm ci
-        npm i mocha
+        npm i --global mocha
       
     - name: Build
       run: |

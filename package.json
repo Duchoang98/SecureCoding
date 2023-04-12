@@ -35,6 +35,6 @@
     "fastify": "^4.11.0",
     "json-schema-to-ts": "^2.6.2",
     "pg": "^8.8.0",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.14"
   }
 }
